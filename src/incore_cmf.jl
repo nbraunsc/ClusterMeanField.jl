@@ -1560,10 +1560,13 @@ function cmf_oo_diis(ints_in::InCoreInts{T}, clusters::Vector{MOCluster}, fspace
     #k_ss = hcat(k_ss, k_i)
     nss = size(g_ss,2)
 
+    if zero_intra_rots
+        proj_vec = projection_vector(ansatze, norb)
+    end
+
     for i in 1:maxiter_oo
         #project out invarant orbital rotations
         if zero_intra_rots && orb_hessian
-            proj_vec = projection_vector(ansatze, norb)
             tmp_step = (pinv(proj_vec'*h_i*proj_vec))*(proj_vec'*g_i)
             step_i = proj_vec*tmp_step
         elseif orb_hessian && zero_intra_rots==false
