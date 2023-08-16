@@ -16,15 +16,15 @@ Perform `CMF` (Cluster Mean-Field) calculations. This is simply a variational op
 
 2. Create conda environment to install Julia and will hold the PySCF executable. Install Julia with conda makes sure the correct python version will be found when using PyCall. where `-tauto` let's Julia pick the max number of threads. Use `-t N` to select `N` manually. Removing defaults to 1 thread. 
 
-	```bash
+        ```bash
         conda create -n my_env
         conda activate my_env
-	conda install python==3.7
+        conda install python==3.7
         conda install julia
-	conda install numpy
+        conda install numpy
         pip install pyscf
-	julia --project=./ -tauto 
-	```
+        julia --project=./ -tauto 
+        ```
 
 
 3. Build PyCall from Julia REPL
