@@ -64,7 +64,11 @@ display(clusters)
 #ansatze = [RASCIAnsatz(6, 3, 3, (1,4,1), max_h=2, max_p=2), RASCIAnsatz(6,3,3,(1,4,1), max_h=2, max_p=2)] #FCI type RASCI calculation
 ansatze = [RASCIAnsatz(6, 3, 3, (1,4,1), max_h=1, max_p=1), RASCIAnsatz(6,3,3,(1,4,1), max_h=1, max_p=1)] #Single excitation RASCI calculation
 #ansatze = [RASCIAnsatz(6, 3, 3, (1,4,1), max_h=0, max_p=0), RASCIAnsatz(6,3,3,(1,4,1), max_h=0, max_p=0)] #CASCI type RASCI calculation
-display(ansatze)
+for i in ansatze
+    display(i)
+end
+
+
 
 rdm1 = zeros(size(ints.h1))
 #run cmf_oo
