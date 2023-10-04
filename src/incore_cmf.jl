@@ -1699,10 +1699,8 @@ function cmf_oo_diis(ints_in::InCoreInts{T}, clusters::Vector{MOCluster}, fspace
 end
 
 
-function projection_vector(ansatze::Vector{<:Ansatz}, norb; gradient=false)
+function projection_vector(ansatze::Vector{<:Ansatz}, norb)
     n_dim = norb*(norb-1)÷2#={{{=#
-
-
 
     tmp_mat = Matrix(1I, n_dim, n_dim)
 
@@ -1718,10 +1716,6 @@ function projection_vector(ansatze::Vector{<:Ansatz}, norb; gradient=false)
         append!(invar, tmp)
     end
 
-    if gradient == true
-        return invar
-    end
-
     fci = ActiveSpaceSolvers.FCIAnsatz(norb, 0, 0) #dummie FCI anstaz to generate all pairs
     full_list = ActiveSpaceSolvers.invariant_orbital_rotations(fci)
 
@@ -1734,6 +1728,10 @@ function projection_vector(ansatze::Vector{<:Ansatz}, norb; gradient=false)
         end
     end
     
+    if isempty(keep_list)
+        error("Can't use this projection method, set zero_intra_rots=false in cmf_oo_diis")
+    end
+
     proj_vec = tmp_mat[:,keep_list]
     
     return proj_vec#=}}}=#
