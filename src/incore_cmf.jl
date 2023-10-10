@@ -1729,7 +1729,7 @@ function convert_pairs(original_list, rearranged_pairs)
     return reverted_pairs
 end
 
-function projection_vector(ansatze::Vector{<:Ansatz}, norb)
+function projection_vector(ansatze::Vector{<:Ansatz}, clusters, norb)
     n_dim = norb*(norb-1)÷2#={{{=#
     tmp_mat = Matrix(1I, n_dim, n_dim)
     clusters_new = [[orb for orb in cluster.orb_list] for cluster in clusters]
