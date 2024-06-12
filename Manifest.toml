@@ -25,9 +25,9 @@ uuid = "1520ce14-60c1-5f80-bbc7-55ef81b5835c"
 version = "0.4.4"
 
 [[deps.ActiveSpaceSolvers]]
-deps = ["Arpack", "BenchmarkTools", "BlockDavidson", "Documenter", "InCoreIntegrals", "InteractiveUtils", "JLD2", "KrylovKit", "LinearAlgebra", "LinearMaps", "NPZ", "OrderedCollections", "Parameters", "Printf", "Profile", "QCBase", "StaticArrays", "TensorOperations", "TimerOutputs"]
-git-tree-sha1 = "0c9ce5af82f72b0bec8b40c65c861f3fb115c49d"
-repo-rev = "main"
+deps = ["Arpack", "BenchmarkTools", "BlockDavidson", "Documenter", "InCoreIntegrals", "InteractiveUtils", "JLD2", "KrylovKit", "LinearAlgebra", "LinearMaps", "NPZ", "OrderedCollections", "Parameters", "Printf", "Profile", "QCBase", "RDM", "StatProfilerHTML", "StaticArrays", "TensorOperations", "TimerOutputs"]
+git-tree-sha1 = "228a1411ba327720a7e5a754247060ed2b5f33a8"
+repo-rev = "ddci_interface"
 repo-url = "https://github.com/nbraunsc/ActiveSpaceSolvers.jl.git"
 uuid = "f8e94ea7-44cc-4f7e-92b7-2a8da6f47aca"
 version = "0.1.0"
@@ -97,9 +97,9 @@ uuid = "2a0f44e3-6c83-55bd-87e4-b1978d98bd5f"
 
 [[deps.BenchmarkTools]]
 deps = ["JSON", "Logging", "Printf", "Profile", "Statistics", "UUIDs"]
-git-tree-sha1 = "f1f03a9fa24271160ed7e73051fba3c1a759b53f"
+git-tree-sha1 = "f1dff6729bc61f4d49e140da1af55dcd1ac97b2f"
 uuid = "6e4b80f9-dd63-53aa-95a3-0cdb28fa8baf"
-version = "1.4.0"
+version = "1.5.0"
 
 [[deps.BitTwiddlingConvenienceFunctions]]
 deps = ["Static"]
@@ -109,9 +109,9 @@ version = "0.1.5"
 
 [[deps.BlockDavidson]]
 deps = ["Arpack", "InteractiveUtils", "LinearAlgebra", "LinearMaps", "Printf", "Random"]
-git-tree-sha1 = "181fe1ffc1f9adb45e558be29f9a76d1a4b17757"
+git-tree-sha1 = "a7d280b6900ee911e0da46b797e4d955570cb2e5"
 repo-rev = "main"
-repo-url = "https://github.com/nmayhall-vt/BlockDavidson.jl.git"
+repo-url = "https://github.com/nbraunsc/BlockDavidson.jl.git"
 uuid = "b4c031f8-e7c9-4879-896c-063a10ff8103"
 version = "0.1.0"
 
@@ -155,6 +155,18 @@ deps = ["InteractiveUtils", "UUIDs"]
 git-tree-sha1 = "c0216e792f518b39b22212127d4a84dc31e4e386"
 uuid = "da1fd8a2-8d9e-5ec2-8556-3022fb5608a2"
 version = "1.3.5"
+
+[[deps.ColorTypes]]
+deps = ["FixedPointNumbers", "Random"]
+git-tree-sha1 = "b10d0b65641d57b8b4d5e234446582de5047050d"
+uuid = "3da002f7-5984-5a60-b8a6-cbb66c0b333f"
+version = "0.11.5"
+
+[[deps.Colors]]
+deps = ["ColorTypes", "FixedPointNumbers", "Reexport"]
+git-tree-sha1 = "362a287c3aa50601b0bc359053d5c2468f0e7ce0"
+uuid = "5ae59095-9a9b-59fe-a467-6f913c188581"
+version = "0.12.11"
 
 [[deps.CommonSolve]]
 git-tree-sha1 = "0eee5eb66b1cf62cd6ad1b460238e60e4b09400c"
@@ -214,6 +226,10 @@ version = "1.0.0"
 [[deps.Dates]]
 deps = ["Printf"]
 uuid = "ade2ca70-3891-5945-98fb-dc099432e06a"
+
+[[deps.DelimitedFiles]]
+deps = ["Mmap"]
+uuid = "8bb1440f-4735-579b-a4ab-409b98df4dab"
 
 [[deps.DiffResults]]
 deps = ["StaticArraysCore"]
@@ -284,6 +300,18 @@ git-tree-sha1 = "04ed1f0029b6b3af88343e439b995141cb0d0b8d"
 uuid = "6a86dc24-6348-571c-b903-95158fe2bd41"
 version = "2.17.0"
 
+[[deps.FixedPointNumbers]]
+deps = ["Statistics"]
+git-tree-sha1 = "05882d6995ae5c12bb5f36dd2ed3f61c98cbb172"
+uuid = "53c48c17-4a7d-5ca2-90c5-79b7896eea93"
+version = "0.8.5"
+
+[[deps.FlameGraphs]]
+deps = ["AbstractTrees", "Colors", "FileIO", "FixedPointNumbers", "IndirectArrays", "LeftChildRightSiblingTrees", "Profile"]
+git-tree-sha1 = "bd1aaf448be998ea427b1c7213b8acf2e278498b"
+uuid = "08572546-2f56-4bcf-ba4e-bab62c3a3f89"
+version = "1.0.0"
+
 [[deps.ForwardDiff]]
 deps = ["CommonSubexpressions", "DiffResults", "DiffRules", "LinearAlgebra", "LogExpFunctions", "NaNMath", "Preferences", "Printf", "Random", "SpecialFunctions", "StaticArrays"]
 git-tree-sha1 = "cf0fe81336da9fb90944683b8c41984b08793dad"
@@ -323,6 +351,12 @@ git-tree-sha1 = "19d693666a304e8c371798f4900f7435558c7cde"
 uuid = "61eb1bfa-7361-4325-ad38-22787b887f55"
 version = "0.17.3"
 
+[[deps.HAML]]
+deps = ["DataStructures", "Markdown", "Requires"]
+git-tree-sha1 = "0e2bbef3c669498254a034394d6dd809e7a97ad6"
+uuid = "0bc81568-2411-4001-9bf1-c899fa54f385"
+version = "0.3.5"
+
 [[deps.Highlights]]
 deps = ["DocStringExtensions", "InteractiveUtils", "REPL"]
 git-tree-sha1 = "0341077e8a6b9fc1c2ea5edc1e93a956d2aec0c7"
@@ -353,6 +387,11 @@ repo-rev = "main"
 repo-url = "https://github.com/nmayhall-vt/InCoreIntegrals.jl.git"
 uuid = "d8079e1f-d74b-4a3d-abb0-c0b53e3a8379"
 version = "0.1.0"
+
+[[deps.IndirectArrays]]
+git-tree-sha1 = "012e604e1c7458645cb8b436f8fba789a51b257f"
+uuid = "9b13fd28-a010-5f03-acff-a1bbcff69959"
+version = "1.0.0"
 
 [[deps.InteractiveUtils]]
 deps = ["Markdown"]
@@ -448,6 +487,12 @@ version = "0.15.1"
 [[deps.LazyArtifacts]]
 deps = ["Artifacts", "Pkg"]
 uuid = "4af54fe1-eca0-43a8-85a7-787d91b784e3"
+
+[[deps.LeftChildRightSiblingTrees]]
+deps = ["AbstractTrees"]
+git-tree-sha1 = "fb6803dafae4a5d62ea5cab204b1e657d9737e7f"
+uuid = "1d6d02ad-be62-4b6b-8a6d-2f90e265016e"
+version = "0.2.0"
 
 [[deps.LibCURL]]
 deps = ["LibCURL_jll", "MozillaCACerts_jll"]
@@ -799,6 +844,18 @@ deps = ["ChainRulesCore", "IrrationalConstants", "LogExpFunctions", "OpenLibm_jl
 git-tree-sha1 = "e2cfc4012a19088254b3950b85c3c1d8882d864d"
 uuid = "276daf66-3868-5448-9aa4-cd146d93841b"
 version = "2.3.1"
+
+[[deps.StableRNGs]]
+deps = ["Random"]
+git-tree-sha1 = "83e6cce8324d49dfaf9ef059227f91ed4441a8e5"
+uuid = "860ef19b-820b-49d6-a774-d7a799459cd3"
+version = "1.0.2"
+
+[[deps.StatProfilerHTML]]
+deps = ["DataStructures", "Dates", "FlameGraphs", "HAML", "OrderedCollections", "Profile", "Random", "SHA", "StableRNGs", "Test"]
+git-tree-sha1 = "548c8268e32d405f0d9e7233833c4cee6427bbe8"
+uuid = "a8a75453-ed82-57c9-9e16-4cd1196ecbf5"
+version = "1.6.0"
 
 [[deps.Static]]
 deps = ["IfElse"]
