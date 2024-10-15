@@ -211,7 +211,7 @@ Perform single CMF-CI iteration, returning new energy, and density
 """
 function cmf_ci_iteration(ints::InCoreInts{T}, clusters::Vector{MOCluster}, in_rdm1::RDM1{T}, fspace, ansatze::Vector{<:Ansatz}; 
                           use_pyscf = true, 
-                          verbose   = 1, 
+                          verbose   = 0, 
                           sequential= false, 
                           spin_avg  = true, 
                           tol_ci    = 1e-8,
@@ -275,7 +275,7 @@ function cmf_ci_iteration(ints::InCoreInts{T}, clusters::Vector{MOCluster}, in_r
                 d2 = RDM2(d2aa, d2ab, d2bb)
             else
           
-                solver = SolverSettings(verbose=1, tol=tol_ci, maxiter=maxiter_ci)
+                solver = SolverSettings(verbose=0, tol=tol_ci, maxiter=maxiter_ci, package="arpack")
                 solution = ActiveSpaceSolvers.solve(ints_i, ansatz, solver)
                 d1a, d1b, d2aa, d2bb, d2ab = compute_1rdm_2rdm(solution)
 
@@ -307,7 +307,7 @@ function cmf_ci_iteration(ints::InCoreInts{T}, clusters::Vector{MOCluster}, in_r
     end
     e_curr = compute_energy(ints, rdm1_dict, rdm2_dict, clusters, verbose=verbose)
     
-    if verbose > 0
+    if verbose > 1
         @printf(" CMF-CI Curr: Elec %12.8f Total %12.8f\n", e_curr-ints.h0, e_curr)
     end
 
@@ -1781,7 +1781,8 @@ function projection_vector(ansatze::Vector{<:Ansatz}, clusters, norb)
         # println(invar)
     end
     for (index_i, i) in enumerate(ansatze)
-        if typeof(i) == RASCIAnsatz
+        if typeof(i) == RASCIAnsatz || typeof(i) == RASCIAnsatz_2 || typeof(i) == DDCIAnsatz
+        #if typeof(i) == RASCIAnsatz
             ras1i, ras2i, ras3i = ActiveSpaceSolvers.RASCI.make_rasorbs(i.ras_spaces[1], i.ras_spaces[2], i.ras_spaces[3], i.no)
             for (index_j, j) in enumerate(ansatze)
                 ras1j, ras2j, ras3j = ActiveSpaceSolvers.RASCI.make_rasorbs(j.ras_spaces[1], j.ras_spaces[2], j.ras_spaces[3], j.no)
@@ -1799,14 +1800,11 @@ function projection_vector(ansatze::Vector{<:Ansatz}, clusters, norb)
                             push!(pairs, (ras3i[e]+clusters[index_i].orb_list[1]-1,clusters[index_j].orb_list[1]+ras3j[f]-1))
                         end
                     end
-                    # println(pairs)
                     append!(invar,pairs)
                 end
             end
         end
     end
-    # append!(invar,ras13_ras13_pairs)
-    # println(invar)
     fci = ActiveSpaceSolvers.FCIAnsatz(norb, 0, 0) #dummie FCI anstaz to generate all pairs
     full_list = ActiveSpaceSolvers.invariant_orbital_rotations(fci)
 
